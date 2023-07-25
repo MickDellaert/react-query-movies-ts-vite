@@ -29,7 +29,14 @@ export const Movies = () => {
       <div className="popular">
         <h2>Trending TV shows or movies</h2>
         {popularData?.results.map((item) => (
-          <ListItem key={item.id} id={item.id} title={item.title} poster_path={item.poster_path} media_type="movie" />
+          <ListItem
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            poster_path={item.poster_path}
+            media_type="movie"
+            searched=""
+          />
         ))}
       </div>
 
@@ -42,6 +49,7 @@ export const Movies = () => {
             title={item.title}
             poster_path={item.poster_path}
             media_type={item.media_type}
+            searched=""
           />
         ))}
       </div>

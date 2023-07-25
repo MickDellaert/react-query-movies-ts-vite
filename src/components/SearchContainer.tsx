@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { SearchInput } from "./SearchInput";
+import { SearchResults } from "./SearchResults";
+
+
 
 export const SearchContainer = () => {
   const [movieQuery, setMovieQuery] = useState(localStorage.getItem("query") as string);
@@ -23,10 +26,8 @@ export const SearchContainer = () => {
     <>
       <div>SearchContainer</div>
 
-      <div>Search</div>
-
       <SearchInput getInput={getInput} movieQuery={movieQuery} />
-      {/* <SearchResults movieQuery={movieQuery} /> */}
+      <SearchResults movieQuery={movieQuery} />
     </>
   );
 };

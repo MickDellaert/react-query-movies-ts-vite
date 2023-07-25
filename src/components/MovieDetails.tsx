@@ -7,7 +7,7 @@ import * as api from "../api/api";
 export const MovieDetails = () => {
   const { id } = useParams();
   const location = useLocation();
-  const type = location.state.type;
+  const type = location.state.type as string;
 
   // const searched = location.state.searched;
 
