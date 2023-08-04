@@ -2,17 +2,19 @@ import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Movies } from "./components/Movies";
+import { Home } from "./pages/home/Home";
 import { MovieDetails } from "./components/MovieDetails";
 
 function App() {
-  return (
+  return (<>
+
     <Router>
       <Routes>
-        <Route path="/" element={<Movies />} />
+        <Route path="/" element={<Home />} />
         <Route path="/:type/:id/:title" element={<MovieDetails />} />
       </Routes>
     </Router>
+    </>
   );
 }
 

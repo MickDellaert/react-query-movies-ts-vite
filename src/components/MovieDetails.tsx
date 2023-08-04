@@ -13,11 +13,14 @@ export const MovieDetails = () => {
 
   console.log(id);
   console.log(location);
+
+  const queryId = (parseInt(id as string))
   // console.log("location searched" + searched);
+  console.log(queryId)
 
   const { data: details, isLoading: detailsLoading } = useQuery(
-    ["getDetails", id, type],
-    () => api.getDetails(id as string, type)
+    ["getDetails", queryId, type],
+    () => api.getDetails(queryId, type)
     // {
     //   enabled: type !== "",
     // }

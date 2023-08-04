@@ -51,7 +51,7 @@ export const queryTv = ({ queryKey }: QueryFunctionContext): Promise<MoviesDetai
   return getMovies(`search/tv?api_key=${API_KEY}&language=en-US&query=${movieQuery}&page=1&include_adult=false`);
 };
 
-export const getDetails = (id: string, type: string): Promise<MovieDetail> => {
+export const getDetails = (id: number, type: string): Promise<MovieDetail> => {
   return getMovies(`${type}/${id}?api_key=${API_KEY}&append_to_response=videos,images&include_image_language=en`);
 };
 

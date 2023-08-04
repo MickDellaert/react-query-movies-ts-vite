@@ -24,8 +24,6 @@ export const SearchContainer = () => {
 
   return (
     <>
-      <div>SearchContainer</div>
-
       <SearchInput getInput={getInput} movieQuery={movieQuery} />
       <SearchResults movieQuery={movieQuery} />
     </>

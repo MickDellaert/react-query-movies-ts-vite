@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import * as api from "../api/api";
 import { ListItem } from "./ListItem";
-import { SearchContainer } from "./SearchContainer";
+// import useManyQueries from "../hooks/useManyQueries";
+// import { SearchContainer } from "./SearchContainer";
 
 export const Movies = () => {
   const { isLoading: popularLoading, data: popularData } = useQuery(["popular-movies"], api.getPopular);
@@ -24,10 +25,9 @@ export const Movies = () => {
 
   return (
     <>
-      <SearchContainer />
-
-      <div className="popular">
-        <h2>Trending TV shows or movies</h2>
+      {/* <SearchContainer /> */}
+      <h2>Popular movies</h2>
+      <div className="movie-list popular">
         {popularData?.results.map((item) => (
           <ListItem
             key={item.id}
@@ -40,8 +40,8 @@ export const Movies = () => {
         ))}
       </div>
 
-      <div className="trending">
-        <h2>Trending TV shows or movies</h2>
+      <h2>Trending TV shows or movies</h2>
+      <div className="movie-list trending">
         {trendingData?.results.map((item) => (
           <ListItem
             key={item.id}

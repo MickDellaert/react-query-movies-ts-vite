@@ -6,7 +6,6 @@ type Search = {
 export const SearchInput = ({ getInput, movieQuery }: Search) => {
   return (
     <>
-      <div>Search</div>
       <div className="input-group input">
         <input
           className="form-control border-end-0 border"
