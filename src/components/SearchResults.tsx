@@ -36,7 +36,7 @@ export const SearchResults = ({ movieQuery }: Search) => {
     <>
       <div className="search-results">
         <div className="search-results-movies">
-          {queryData && <h2>Movies</h2>}
+          {queryData && <h2>you searched for: {searchTerm}</h2>}
           <div className="search-results-movies-wrapper">
             {queryData?.results.map((item) => (
               <div className="search-results-item">

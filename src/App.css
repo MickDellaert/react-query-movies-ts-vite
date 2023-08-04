@@ -139,11 +139,14 @@ h5 {
 }
 
 .search-results {
-  width: 90%;
+  position: absolute;
+  width: 80%;
+  left: 0;
+  right: 0;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0.96);
 }

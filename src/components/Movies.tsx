@@ -26,7 +26,7 @@ export const Movies = () => {
   return (
     <>
       {/* <SearchContainer /> */}
-      <h2>Popular movies</h2>
+      <h3>Popular movies</h3>
       <div className="movie-list popular">
         {popularData?.results.map((item) => (
           <ListItem
@@ -40,7 +40,7 @@ export const Movies = () => {
         ))}
       </div>
 
-      <h2>Trending TV shows or movies</h2>
+      <h3>Trending TV shows or movies</h3>
       <div className="movie-list trending">
         {trendingData?.results.map((item) => (
           <ListItem

@@ -10,7 +10,7 @@ const useManyQueries = (
 ) => {
   // const multifetcher = "multifetcher"
 
-  const { isLoading, data } = useQuery(["dynamic-query"], fetcherFn, {
+  const { isLoading, isError, data } = useQuery(["dynamic-query"], fetcherFn, {
     select: (data: api.Movies) => {
       const slicedData = data.results.slice(0, itemNumber);
       return slicedData;
@@ -19,7 +19,7 @@ const useManyQueries = (
 
   // const { isLoading: popularLoading, data: trendingData } = useQuery(["popular-movies"], api.getPopular);
 
-  const userQueries = useQueries({
+  const detailedQueries = useQueries({
     queries:
       data?.map((item: { id: number; media_type: string }) => {
         return {
@@ -31,10 +31,11 @@ const useManyQueries = (
       }) ?? [],
   });
 
-  // const userQueriesTest = userQueries.map(obj =>({...obj, media_type: type}))
-  const userQueriesIndexed = userQueries.map((item, key) => ({ key, ...item }));
 
-  return { userQueriesIndexed, data, userQueries };
+  const detailedQueriesMediaType = detailedQueries.map((item, index) => ({ ...item, media_type: data![index].media_type }));
+  const detailedQueriesIndexed = detailedQueriesMediaType.map((item, key) => ({ key, ...item }));
+
+  return { detailedQueriesIndexed, data, detailedQueries};
 };
 
 export default useManyQueries;
