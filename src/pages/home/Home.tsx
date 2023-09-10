@@ -3,6 +3,7 @@ import React from "react";
 import { SearchContainer } from "../../components/SearchContainer";
 import { ManyQueries } from "../../components/ManyQueries";
 import { Movies } from "../../components/Movies";
+import { Slider } from "../../components/Slider";
 
 export const Home = () => {
 
@@ -12,6 +13,7 @@ export const Home = () => {
       <SearchContainer />
       <ManyQueries/>
       <Movies />
+      <Slider/>
     </>
   );
 };

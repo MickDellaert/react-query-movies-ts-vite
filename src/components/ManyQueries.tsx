@@ -1,15 +1,15 @@
 import * as api from "../api/api";
 import { Link } from "react-router-dom";
-import useManyQueries from "../hooks/useDetailedQueries";
+import useManyQueries from "../hooks/useManyQueries";
 
 export const ManyQueries = () => {
-  const { detailedQueriesIndexed } = useManyQueries(api.getTrending, "trending-movie-fetcher", "", 20);
+  const { detailedQueriesMediaType } = useManyQueries(api.getTrending, "trending-movie-fetcher", "", 20);
 
-  if (detailedQueriesIndexed.some((query) => query.isLoading)) {
+  if (detailedQueriesMediaType.some((query) => query.isLoading)) {
     return <h2>"Loading"</h2>;
   }
 
-  console.log(detailedQueriesIndexed);
+  console.log(detailedQueriesMediaType);
   // console.log(detailedQueries)
   // console.log(data)
 
@@ -17,10 +17,10 @@ export const ManyQueries = () => {
     <>
       <h3>Trending TV shows or movies with details</h3>
       <div className="movie-list">
-        {detailedQueriesIndexed.map((many) => (
+        {detailedQueriesMediaType.map((many) => (
           <Link
             key={many.data?.id}
-            to={`${many.media_type}/${many.data?.id}/title=${many.data?.title}`}
+            to={`${many.media_type}/${many.data?.id}/title=${many.data?.title ? many.data?.title : many.data?.name}`} 
             state={{ type: many.media_type, searched: "" }}
           >
             <div>

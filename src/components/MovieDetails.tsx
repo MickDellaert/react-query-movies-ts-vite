@@ -36,7 +36,7 @@ export const MovieDetails = () => {
     <>
       <h3>Details</h3>
       {details?.title && <h2>{details.title}</h2>}
-      {details?.original_name && <h2>{details.original_name}</h2>}
+      {details?.name && <h2>{details.name}</h2>}
     </>
   );
 };
