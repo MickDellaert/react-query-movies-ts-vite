@@ -10,6 +10,12 @@ export const SliderHorizontal = ({
   handleTransition,
   transition,
 }: Interface.SliderType) => {
+
+
+
+  
+// console.log(children.length)
+
   return (
     <>
       <div
@@ -22,8 +28,9 @@ export const SliderHorizontal = ({
           <div
             className="horizontal-slider-content"
             style={{
-              transform: `translateX(-${currentIndex * (100 / itemNumber)}%)`,
               transition: transition ? `all 300ms ease-out` : "none",
+              width: `calc((100%  / ${itemNumber})`,
+              transform: `translateX(-${currentIndex * 100}%)`,
             }}
             // onTransitionEnd={() => handleSliderTransition()}
             onTransitionEnd={() => handleTransition()}

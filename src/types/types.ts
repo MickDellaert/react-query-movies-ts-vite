@@ -1,11 +1,16 @@
 // import * as api from "../api/api";
 import { SetStateAction } from "react";
-// import { QueryFunctionContext } from "@tanstack/react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 
+export interface Tester {
+  detailedQueriesProp: UseQueryResult<Details, Error>[];
+  totalNumber?: number
+}
 
 export interface SliderType  {
   children: React.ReactNode
-  trendingDataCombined: (Details | undefined)[];
+  // trendingDataCombined: UseQueryResult<Details, Error>[];
+  // trendingDataCombined: TrendingDataCombined;
   currentIndex: number;
   itemNumber: number;
   singlePadding: number;
@@ -15,6 +20,10 @@ export interface SliderType  {
   handleClick:(item: SetStateAction<number>) => void 
   handleTransition: () => void
   // transition:
+}
+
+export interface TrendingDataCombined {
+  data: Details[]
 }
 
 
@@ -45,17 +54,17 @@ export interface MediaResult {
 export interface Details {
   media_type?: string
   key?: number
-  adult?: boolean
-  backdrop_path?: string
-  belongs_to_collection?: BelongsToCollection
-  budget?: number
-  genres?: Genre[]
-  homepage?: string
-  id?: number
-  imdb_id?: string
-  name?: string
-  original_language?: string
-  original_title?: string
+  adult: boolean
+  backdrop_path: string
+  belongs_to_collection: BelongsToCollection
+  budget: number
+  genres: Genre[]
+  homepage: string
+  id: number
+  imdb_id: string
+  name: string
+  original_language: string
+  original_title: string
   overview?: string
   popularity?: number
   poster_path?: string

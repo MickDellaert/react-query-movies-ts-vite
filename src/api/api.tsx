@@ -19,7 +19,7 @@ export interface Media {
 }
 
 export interface MediaResult {
-  adult: boolean
+  adult?: boolean
   backdrop_path: string
   id: number
   title: string

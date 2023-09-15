@@ -3,7 +3,6 @@ import { useLocation, useParams } from "react-router-dom";
 
 import * as api from "../api/api";
 
-
 export const MovieDetails = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -14,9 +13,9 @@ export const MovieDetails = () => {
   console.log(id);
   console.log(location);
 
-  const queryId = (parseInt(id as string))
+  const queryId = parseInt(id as string);
   // console.log("location searched" + searched);
-  console.log(queryId)
+  console.log(queryId);
 
   const { data: details, isLoading: detailsLoading } = useQuery(
     ["getDetails", queryId, type],
@@ -30,7 +29,7 @@ export const MovieDetails = () => {
     return <h2>"Loading"</h2>;
   }
 
-  console.log(details)
+  console.log(details);
 
   return (
     <>

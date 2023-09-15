@@ -30,8 +30,6 @@ export const SearchResults = ({ movieQuery }: Search) => {
     return <h2>Sorry, no results were found</h2>;
   }
 
-  console.log(queryData);
-
   return (
     <>
       <div className="search-results">
