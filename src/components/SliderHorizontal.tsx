@@ -10,11 +10,7 @@ export const SliderHorizontal = ({
   handleTransition,
   transition,
 }: Interface.SliderType) => {
-
-
-
-  
-// console.log(children.length)
+  // console.log(children.length)
 
   return (
     <>

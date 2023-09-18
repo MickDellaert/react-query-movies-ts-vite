@@ -1,38 +1,74 @@
-import { SetStateAction, useEffect, useMemo, useState } from "react";
-import { Details } from "../types/types";
-import { UseQueryResult } from "@tanstack/react-query";
+import React from "react";
+import { Children, SetStateAction, useEffect, useMemo, useState } from "react";
+// import { Details } from "../types/types";
+// import { UseQueryResult } from "@tanstack/react-query";
 // import { Tester } from "../types/types";
 
 const useSlider = (
-  itemNumberVertical: number,
+  itemNumber: number,
   totalNumber: number,
   loop: boolean,
-  sliderImportData: UseQueryResult<Details, Error>[]
+  // sliderImportData: Array<string> | Details[]
+  sliderImportData: Array<string>,
+  children: React.ReactElement
 ) => {
-  const [currentIndex, setCurrentIndex] = useState(loop ? itemNumberVertical : 0);
+  const [currentIndex, setCurrentIndex] = useState(loop ? itemNumber : 0);
   const [transition, setTransition] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
 
-  const sliderDataDataMemo = useMemo(() => sliderImportData.map((e) => e.data) as Details[], [sliderImportData]);
+  // const sliderDataDataMemo = useMemo(() => sliderImportData.map((e) => e.data) as Details[], [sliderImportData]);
+  // const sliderDataDataMemo = sliderImportData;
 
-  const trendingDataPrevMemo = useMemo(
-    () => sliderDataDataMemo.slice(totalNumber - itemNumberVertical, totalNumber),
-    [sliderDataDataMemo, totalNumber, itemNumberVertical]
-  );
+  // const trendingDataPrevMemo = useMemo(
+  //   () => sliderDataDataMemo.slice(totalNumber - itemNumber, totalNumber),
+  //   [sliderDataDataMemo, totalNumber, itemNumber]
+  // );
 
-  const trendingDataNextMemo = useMemo(
-    () => sliderDataDataMemo.slice(0, itemNumberVertical),
-    [sliderDataDataMemo, itemNumberVertical]
-  );
+  // const trendingDataNextMemo = useMemo(
+  //   () => sliderDataDataMemo.slice(0, itemNumber),
+  //   [sliderDataDataMemo, itemNumber]
+  // );
 
-  const sliderExportData = useMemo(
-    () => (loop ? [...trendingDataPrevMemo, ...sliderDataDataMemo, ...trendingDataNextMemo] : sliderDataDataMemo),
-    [trendingDataPrevMemo, sliderDataDataMemo, trendingDataNextMemo, loop]
+  // const sliderExportData = useMemo(
+  //   () => (loop ? [...trendingDataPrevMemo, ...sliderDataDataMemo, ...trendingDataNextMemo] : sliderDataDataMemo),
+  //   [trendingDataPrevMemo, sliderDataDataMemo, trendingDataNextMemo, loop]
+  // );
+
+  // sliderImportData = useMemo(() => {
+  //   // const sliderLoopD = sliderImportData
+
+  //   const sliderLoopDataPrev = sliderImportData.slice(totalNumber - itemNumber, totalNumber);
+  //   const sliderLoopDataNext = sliderImportData.slice(0, itemNumber);
+  //   const sliderLoopData = loop
+  //     ? [...sliderLoopDataPrev, ...sliderImportData, ...sliderLoopDataNext]
+  //     : sliderImportData;
+
+  //   return sliderLoopData;
+  // }, [itemNumber, loop, totalNumber, sliderImportData]);
+  // console.log(children.props.children)
+  // console.log(Children.toArray(children.props.children))
+
+  const sliderPrev = useMemo(
+    () =>
+    
+      children.props
+        ? Children.toArray(children.props.children).slice(totalNumber - itemNumber, totalNumber)
+        : Children.toArray(children).slice(totalNumber - itemNumber, totalNumber),
+    [totalNumber, itemNumber, children]
   );
+  const sliderNext = useMemo(
+    () =>
+      children.props
+        ? Children.toArray(children.props.children).slice(0, itemNumber)
+        : Children.toArray(children).slice(0, itemNumber),
+    [children, itemNumber]
+  );
+  console.log(sliderPrev);
+  console.log(sliderNext);
 
   // const sliderDataData = sliderImportData.map((e) => e.data) as Details[];
-  // const trendingDataNextNew = sliderDataData?.slice(0, itemNumberVertical);
-  // const trendingDataPrevNew = sliderDataData?.slice(totalNumber - itemNumberVertical, totalNumber);
+  // const trendingDataNextNew = sliderDataData?.slice(0, itemNumber);
+  // const trendingDataPrevNew = sliderDataData?.slice(totalNumber - itemNumber, totalNumber);
   // const sliderExportData = loop ? [...trendingDataPrevNew, ...sliderDataData, ...trendingDataNextNew] : sliderDataData;
 
   useEffect(() => {
@@ -77,24 +113,23 @@ const useSlider = (
       if (currentIndex === 0) {
         setTransition(false);
         setCurrentIndex(
-          // trendingDataIndexed - itemNumberVertical * 2
+          // trendingDataIndexed - itemNumber * 2
           totalNumber
         );
       }
       if (
         currentIndex >
-        // trendingDataIndexed - itemNumberVertical * 2
+        // trendingDataIndexed - itemNumber * 2
         totalNumber
       ) {
         setTransition(false);
         setCurrentIndex(
           currentIndex - totalNumber
-          // (trendingDataIndexed - itemNumberVertical * 2 )
+          // (trendingDataIndexed - itemNumber * 2 )
         );
       }
     }
   };
-
 
   const useSliderObj = {
     nextFunction,
@@ -105,20 +140,24 @@ const useSlider = (
     currentIndex,
     transition,
     isSliding,
-    sliderExportData,
+    // sliderExportData,
   };
 
   return {
-    // nextFunction,
-    // previousFunction,
-    // handleClick,
-    // handleTransition,
-    // pauseSlider,
-    // currentIndex,
-    // transition,
-    // isSliding,
+    nextFunction,
+    previousFunction,
+    handleClick,
+    handleTransition,
+    pauseSlider,
+    currentIndex,
+    transition,
+    isSliding,
     // sliderExportData,
     useSliderObj,
+    sliderImportData,
+    sliderPrev,
+    sliderNext,
+    // trendingDataPrevMemo
   };
 };
 

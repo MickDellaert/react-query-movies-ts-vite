@@ -3,9 +3,10 @@ import React from "react";
 import { SearchContainer } from "../../components/SearchContainer";
 // import { ManyQueries } from "../../components/ManyQueries";
 // import { Movies } from "../../components/Movies";
-import { Slider } from "../../components/Slider";
+import { SliderContainer } from "../../components/SliderContainer";
 import useManyQueries from "../../hooks/useManyQueries";
 import * as api from "../../api/api";
+import { Hero } from "../../components/Hero";
 // import { SliderCopy } from "../../components/SliderCopy";
 
 export const Home = () => {
@@ -23,9 +24,10 @@ export const Home = () => {
   return (
     <>
       <SearchContainer />
+      <Hero/>
       {/* <ManyQueries/> */}
       {/* <Movies /> */}
-      <Slider />
+      {/* <SliderContainer /> */}
       {/* <SliderCopy/> */}
     </>
   );

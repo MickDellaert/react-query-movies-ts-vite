@@ -8,7 +8,7 @@ export interface Tester {
 }
 
 export interface SliderType  {
-  children: React.ReactNode
+  children: React.ReactElement
   // trendingDataCombined: UseQueryResult<Details, Error>[];
   // trendingDataCombined: TrendingDataCombined;
   currentIndex: number;

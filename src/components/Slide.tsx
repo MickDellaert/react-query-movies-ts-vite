@@ -6,6 +6,8 @@ type Slideprops = {
 };
 
 export const Slide = ({ children, index, handleClick, singlePadding }: Slideprops) => {
+  // console.log(children);
+
   return (
     <>
       <div

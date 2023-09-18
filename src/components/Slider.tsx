@@ -1,120 +1,128 @@
-import * as api from "../api/api";
-import { v4 as uuidv4 } from "uuid";
 // import * as Interface from "../types/types";
-
-import useManyQueries from "../hooks/useManyQueries";
+import { Children } from "react";
 import useSlider from "../hooks/useSlider";
-import { SliderHorizontal } from "./SliderHorizontal";
-import { Slide } from "./Slide";
-// import { SliderVertical } from "./SliderVertical";
+// import React, { Children } from "react";
 
-export const Slider = () => {
-  const totalNumber = 8;
-  // const itemNumberHorizontal = 1;
-  const itemNumberVertical = 4;
-  // const skipFirst = 0;
-  // const itemNumber = 6;
-  const singlePadding = 0;
-  const loop = true;
+type SlideProps = {
+  children: React.ReactElement;
+  // index: number;
+  // handleClick: (index: number) => void;
+  // singlePadding: number;
+};
 
-  const { detailedQueries } = useManyQueries(api.getTrending, "trending-movie-details-fetcher", "", totalNumber);
-  // const sliderImportData = detailedQueriesProp.map((e) => e.data) as Interface.Details[];
+type SliderProps = {
+  children: React.ReactElement;
+  itemNumber: number;
+  totalNumber: number;
+  loop: boolean; // index: number;
 
-  const {
-    // nextFunction,
-    // previousFunction,
-    // handleClick,
-    // handleTransition,
-    // pauseSlider,
-    // currentIndex,
-    // transition,
-    // isSliding,
-    // sliderExportData
-    useSliderObj,
-  } = useSlider(itemNumberVertical, totalNumber, loop, detailedQueries);
+  // handleClick: (index: number) => void;
+  // singlePadding: number;
+};
 
-  // if (detailedQueries.some((query) => query.isLoading)) {
-  //   return <h2>"Multi Loading"</h2>;
-  // }
-
-  // if (detailedQueries.some((query) => query.isError)) {
-  //   return <h2>"Multi Error"</h2>;
-  // }
-
-  // const detailedQueriesNew = detailedQueriesProp.map((e) => e.data) as Interface.Details[];
-
-  // const trendingDataNextNew = detailedQueriesNew?.slice(0, itemNumberVertical + skipFirst);
-  // const trendingDataPrevNew = detailedQueriesNew?.slice(totalNumber - itemNumberVertical, totalNumber);
-  // const trendingDataCombinedNew = loop
-  //   ? [...trendingDataPrevNew, ...detailedQueriesNew, ...trendingDataNextNew]
-  //   : detailedQueriesNew;
-
-  // const data = {
-  //   trendingDataCombined,
-  //   currentIndex,
-  //   transition,
-  //   skipFirst,
-  //   handleClick,
-  //   handleTransition,
-  // };
-
-  if (detailedQueries.some((query) => query.isLoading)) {
-    return <h2>"Multi Loading"</h2>;
-  }
-
-  if (detailedQueries.some((query) => query.isError)) {
-    return <h2>"Multi Error"</h2>;
-  }
-
+export const Slide = ({ children }: SlideProps) => {
   return (
     <>
-      {!loop && useSliderObj.currentIndex > 0 && <button onClick={useSliderObj.previousFunction}>Previous</button>}
-      {loop && <button onClick={useSliderObj.previousFunction}>Previous</button>}
-      {useSliderObj.currentIndex < totalNumber - itemNumberVertical && !loop && (
-        <button onClick={useSliderObj.nextFunction}>Next</button>
-      )}
-      {loop && <button onClick={useSliderObj.nextFunction}>Next</button>}
-      {loop && (
-        <button onClick={useSliderObj.pauseSlider}>
-          {useSliderObj.isSliding ? "Pause slideshow" : "Start slideshow"}
-        </button>
-      )}
-
-      <SliderHorizontal
-        // {...data}
-        // trendingDataCombined={trendingDataCombined}
-        // currentIndex={useSliderObj.currentIndex}
-        // transition={useSliderObj.transition}
-        // handleClick={useSliderObj.handleClick}
-        // handleTransition={useSliderObj.handleTransition}
-        {...useSliderObj}
-        itemNumber={itemNumberVertical}
-        divHeight={"auto"}
-        containerPadding={10}
-        singlePadding={0}
+      <div
+        // onClick={() => handleClick(index)}
+        className="horizontal-slider-item"
+        style={{
+          // width: `calc((100%  / ${itemNumber})`,
+          paddingBlock: 0,
+        }}
       >
-        {useSliderObj.sliderExportData.map((item, index) => (
-          <Slide index={index} handleClick={useSliderObj.handleClick} singlePadding={singlePadding} key={uuidv4()}>
-            {/* <div
-              // onClick={() => handleClick(index)}
-              // className="horizontal-slider-item"
-              key={uuidv4()}
-              style={{
-                // width: `calc((100%  / ${itemNumber})`,
-                // paddingBlock: `${singlePadding}px`,
-              }}
-            > */}
-            <p>index: {index} </p>
-            {/* <p>key: {item?.key} </p> */}
-            <h5>{item.title} </h5>
-            <h5>{item.name}</h5>
-
-            {item.images?.backdrops.slice(0, 1).map((items) => (
-              <img className="horizontal-slider-item-image" src={`${api.IMG_URL}${items.file_path}`} alt="" />
-            ))}
-          </Slide>
-        ))}
-      </SliderHorizontal>
+        {children}
+      </div>
     </>
   );
 };
+
+export const Slider = (
+  { children, ...sliderOptions }: SliderProps // sliderDataFromHero,
+) =>
+  // loop,
+  // itemNumber,
+  // totalNumber
+  // divHeight,
+  // itemNumber,
+  // currentIndex,
+  // handleClick,
+  // handleTransition,
+  // transition,
+  {
+    const testArr = ["slide 1", "slide 2", "slide 3", "slide 4", "slide 5", "slide 6"];
+
+    const { itemNumber, totalNumber, loop } = sliderOptions;
+
+    console.log(Children.toArray(children));
+
+    const {
+      nextFunction,
+      previousFunction,
+      // handleClick,
+      handleTransition,
+      // pauseSlider,
+      currentIndex,
+      transition,
+      // isSliding,
+      // sliderExportData,
+      // sliderImportData,
+      sliderPrev,
+      sliderNext,
+      // trendingDataPrevMemo
+    } = useSlider(itemNumber, totalNumber, loop, testArr, children);
+
+    // console.log(React.Children.toArray(children))
+    // console.log(sliderNext)
+
+    // const renderChildren = (item) => {
+    //   return <h2 className="horizontal-slider-item">{item.name}</h2>;
+    // };
+
+    // const renderChildrenMap = (passedArray): Array<string> => {
+    //   return passedArray.map((item) => <h3 className="horizontal-slider-item">{item.name}</h3>);
+    // };
+
+    // console.log(children);
+    // console.log(React.Children.toArray(children));
+    // console.log(sliderExportData)
+
+    // const sliderLoopData = sliderLoopDataFunction();
+    // console.log(sliderLoopDataMemo);
+    // console.log(useSlider);
+
+    return (
+      <>
+        {!loop && currentIndex > 0 && <button onClick={previousFunction}>Previous</button>}
+        {loop && <button onClick={previousFunction}>Previous</button>}
+
+        {currentIndex < totalNumber - itemNumber && !loop && <button onClick={nextFunction}>Next</button>}
+        {loop && <button onClick={nextFunction}>Next</button>}
+
+        <div className="horizontal-slider-container" style={{ padding: 10 }}>
+          <div className="horizontal-slider-crop">
+            <div
+              className="horizontal-slider-content"
+              style={{
+                transition: transition ? `all 300ms ease-out` : "none",
+                width: `calc((100%  / ${itemNumber})`,
+                transform: `translateX(-${currentIndex * 100}%)`,
+              }}
+              onTransitionEnd={() => handleTransition()}
+            >
+              {/* {sliderData.map((item) => item
+              // <div className="horizontal-slider-item">{item.name}</div>
+            )} */}
+
+              {/* {sliderLoopDataMemo.map((item) => item.name)} */}
+              {/* {renderChildrenMap(sliderImportData)} */}
+
+              {loop && sliderPrev}
+              {children}
+              {loop && sliderNext}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
