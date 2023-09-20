@@ -1,12 +1,13 @@
-import React from "react";
+// import React from "react";
 // import { Movies } from "../../components/Movies";
 import { SearchContainer } from "../../components/SearchContainer";
 // import { ManyQueries } from "../../components/ManyQueries";
 // import { Movies } from "../../components/Movies";
-import { SliderContainer } from "../../components/SliderContainer";
+// import { SliderContainer } from "../../components/SliderContainer";
 import useManyQueries from "../../hooks/useManyQueries";
 import * as api from "../../api/api";
 import { Hero } from "../../components/Hero";
+import { HeroWithHook } from "../../components/HeroWithHook";
 // import { SliderCopy } from "../../components/SliderCopy";
 
 export const Home = () => {
@@ -25,6 +26,7 @@ export const Home = () => {
     <>
       <SearchContainer />
       <Hero/>
+      <HeroWithHook/>
       {/* <ManyQueries/> */}
       {/* <Movies /> */}
       {/* <SliderContainer /> */}

@@ -116,8 +116,7 @@ h5 {
 
 .horizontal-slider-content {
   display: flex;
-  
-  /* transform: translateX(-300%); */
+    /* transform: translateX(-300%); */
 }
 
 .horizontal-slider-item {

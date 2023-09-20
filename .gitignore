@@ -27,3 +27,6 @@ dist-ssr
 
 src/components/SliderVertical.tsx
 src/components/SliderCopy.tsx
+src/components/Slider.tsx
+src/components/SliderContainer.tsx
+src/components/SliderTwo.tsx

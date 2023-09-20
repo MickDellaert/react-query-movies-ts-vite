@@ -1,4 +1,4 @@
-import { Slider, Slide } from "./Slider";
+import { SliderWithContext, SlideWithContext } from "./SliderWithContext";
 import useManyQueries from "../hooks/useManyQueries";
 import * as api from "../api/api";
 
@@ -16,25 +16,11 @@ export const Hero = () => {
     sliderOptions.totalNumber
   );
 
-  // const itemNumber = 4;
-  // const totalNumber = 6;
-  // const loop = true;
-
-  // const testArr = ["slide 1", "slide 2", "slide 3", "slide 4", "slide 5", "slide 6"];
-  // const sliderImportData = [
-  //   { name: "slide 1" },
-  //   { name: "slide 2" },
-  //   { name: "slide 3" },
-  //   { name: "slide 4" },
-  //   { name: "slide 5" },
-  //   { name: "slide 6" },
-  // ];
-
   return (
-    <Slider {...sliderOptions}>
+    <SliderWithContext {...sliderOptions}>
       <>
-        {detailedQueriesMediaTypeData.map((item) => (
-          <Slide>
+        {detailedQueriesMediaTypeData.map((item, index) => (
+          <SlideWithContext index={index}>
             <>
               <p>key: {item.key} </p>
               <h5>{item.title} </h5>
@@ -43,7 +29,7 @@ export const Hero = () => {
                 <img className="horizontal-slider-item-image" src={`${api.IMG_URL}${items.file_path}`} alt="" />
               ))}
             </>
-          </Slide>
+          </SlideWithContext>
         ))}
         {/* <Slide>
           <h2>"1"</h2>
@@ -64,6 +50,6 @@ export const Hero = () => {
           <h2>"6"</h2>
         </Slide> */}
       </>
-    </Slider>
+    </SliderWithContext>
   );
 };
