@@ -1,30 +1,11 @@
-import { Children, cloneElement, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-const useSlider = (itemNumber: number, totalNumber: number, loop: boolean, children: React.ReactElement) => {
-  
+const useSliderControls = (sliderOptions: { itemNumber: number; totalNumber: number; loop: boolean }) => {
+  const { itemNumber, totalNumber, loop } = sliderOptions;
+
   const [currentIndex, setCurrentIndex] = useState(loop ? itemNumber : 0);
   const [transition, setTransition] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
-
-  const sliderChildren = useMemo(() => {
-    const sliderPrev = children.props
-      ? Children.toArray(children.props.children).slice(totalNumber - itemNumber, totalNumber)
-      : Children.toArray(children).slice(totalNumber - itemNumber, totalNumber);
-
-    const sliderNext = children.props
-      ? Children.toArray(children.props.children).slice(0, itemNumber)
-      : Children.toArray(children).slice(0, itemNumber);
-
-    const combinedChildren = loop
-      ? [...sliderPrev, ...Children.toArray(children.props.children), ...sliderNext]
-      : Children.toArray(children.props.children);
-
-    const combinedChildrenWithKey = Children.map(combinedChildren, (child, index) =>
-      cloneElement(child as React.ReactElement, { index: index, key: index })
-    );
-
-    return combinedChildrenWithKey;
-  }, [children, itemNumber, totalNumber, loop]);
 
   useEffect(() => {
     if (isSliding) {
@@ -84,17 +65,16 @@ const useSlider = (itemNumber: number, totalNumber: number, loop: boolean, child
   };
 
   return {
-    nextFunction,
-    previousFunction,
-    handleClick,
-    handleTransition,
-    pauseSlider,
-    currentIndex,
-    transition,
-    isSliding,
+    // nextFunction,
+    // previousFunction,
+    // handleClick,
+    // handleTransition,
+    // pauseSlider,
+    // currentIndex,
+    // transition,
+    // isSliding,
     useSliderObj,
-    sliderChildren,
   };
 };
 
-export default useSlider;
+export default useSliderControls;

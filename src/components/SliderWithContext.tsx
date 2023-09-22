@@ -1,10 +1,9 @@
 // import * as Interface from "../types/types";
 // import { Children, cloneElement } from "react";
-import useSlider from "../hooks/useSlider";
-import React from "react";
-import { SliderContext } from "./SliderContext";
+// import useSlider from "../hooks/useSlider";
 // import { useContext } from "react";
-import { useContextTypeTest } from "./SliderContext";
+import { useSliderData } from "../hooks/useSliderData";
+import { SliderContext, useSliderContext } from "./SliderContext";
 
 type SlideProps = {
   children: React.ReactElement;
@@ -15,11 +14,19 @@ type SliderProps = {
   children: React.ReactElement;
   itemNumber: number;
   totalNumber: number;
-  loop: boolean; 
+  loop: boolean;
+  currentIndex: number;
+  transition: boolean;
+  showNumber: number;
+  skipFirst: number;
+  nextFunction: () => void;
+  handleTransition: () => void;
+  previousFunction: () => void;
+  handleClick: (index: number) => void;
 };
 
 export const SlideWithContext: React.FC<SlideProps> = ({ children, index }: SlideProps) => {
-  const { handleClick } = useContextTypeTest();
+  const { handleClick } = useSliderContext();
 
   return (
     <>
@@ -27,7 +34,7 @@ export const SlideWithContext: React.FC<SlideProps> = ({ children, index }: Slid
         onClick={() => handleClick(index)}
         className="horizontal-slider-item"
         style={{
-          // width: `calc((100%  / ${itemNumber})`,
+          // width: `calc((100% / ${itemNumber})`,
           paddingBlock: 0,
         }}
       >
@@ -38,24 +45,35 @@ export const SlideWithContext: React.FC<SlideProps> = ({ children, index }: Slid
   );
 };
 
-export const SliderWithContext = ({ children, ...sliderOptions }: SliderProps) => {
-  
-  const { itemNumber, totalNumber, loop } = sliderOptions;
+export const SliderWithContext = ({
+  children,
+  skipFirst,
+  showNumber,
+  itemNumber,
+  totalNumber,
+  loop,
+  ...useSliderObj
+}: SliderProps) => {
+  const { nextFunction, previousFunction, handleClick, handleTransition, currentIndex, transition } = useSliderObj;
 
-  const {
-    nextFunction,
-    previousFunction,
-    handleClick,
-    handleTransition,
-    currentIndex,
-    transition,
-    sliderChildren,
-    // pauseSlider,
-    // isSliding,
-    // sliderExportData,
-    // sliderPrev,
-    // sliderNext,
-  } = useSlider(itemNumber, totalNumber, loop, children);
+  const sliderChildrenData = useSliderData(children, totalNumber, itemNumber, loop);
+
+  // const { itemNumber, totalNumber, loop } = sliderOptions;
+
+  // const {
+  //   // nextFunction,
+  //   // previousFunction,
+  //   // handleClick,
+  //   // handleTransition,
+  //   // currentIndex,
+  //   // transition,
+  //   sliderChildren,
+  //   // pauseSlider,
+  //   // isSliding,
+  //   // sliderExportData,
+  //   // sliderPrev,
+  //   // sliderNext,
+  // } = useSlider(itemNumber, totalNumber, loop, children);
 
   return (
     <>
@@ -71,12 +89,12 @@ export const SliderWithContext = ({ children, ...sliderOptions }: SliderProps) =
             className="horizontal-slider-content"
             style={{
               transition: transition ? `all 300ms ease-out` : "none",
-              width: `calc((100%  / ${itemNumber})`,
-              transform: `translateX(-${currentIndex * 100}%)`,
+              width: `calc((100%  / ${showNumber})`,
+              transform: `translateX(-${(currentIndex + skipFirst) * 100}%)`,
             }}
             onTransitionEnd={() => handleTransition()}
           >
-            <SliderContext.Provider value={{ handleClick }}>{sliderChildren}</SliderContext.Provider>
+            <SliderContext.Provider value={{ handleClick }}>{sliderChildrenData}</SliderContext.Provider>
           </div>
         </div>
       </div>

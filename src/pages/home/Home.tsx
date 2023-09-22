@@ -23,7 +23,7 @@ export const Home = () => {
   }
 
   return (
-    <>
+    <><div >
       <SearchContainer />
       <Hero/>
       <HeroWithHook/>
@@ -31,6 +31,7 @@ export const Home = () => {
       {/* <Movies /> */}
       {/* <SliderContainer /> */}
       {/* <SliderCopy/> */}
+      </div>
     </>
   );
 };

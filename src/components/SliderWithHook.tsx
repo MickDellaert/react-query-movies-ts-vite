@@ -1,4 +1,5 @@
-import * as Interface from "../types/types";
+// import * as Interface from "../types/types";
+import { SliderContext, useSliderContext } from "./SliderContext";
 // import { Children } from "react";
 // import React, { useState } from "react";
 // import React, { Children } from "react";
@@ -6,8 +7,8 @@ import * as Interface from "../types/types";
 type SlideProps = {
   children: React.ReactElement;
   index: number;
-  handleClick: (index: number) => void;
-  item: Interface.Details;
+  // handleClick: (index: number) => void;
+  // item: Interface.Details;
   // singlePadding: number;
 };
 
@@ -16,14 +17,17 @@ type SliderProps = {
   itemNumber: number;
   totalNumber: number;
   loop: boolean; // index: number;
-  nextFunction: () => void;
-  previousFunction: () => void;
   currentIndex: number;
   transition: boolean;
+  nextFunction: () => void;
+  previousFunction: () => void;
   handleTransition: () => void;
+  handleClick: (index: number) => void;
 };
 
-export const SlideWithHook = ({ children, handleClick, index }: SlideProps) => {
+export const SlideWithHook = ({ children, index }: SlideProps) => {
+  const { handleClick } = useSliderContext();
+
   return (
     <>
       <div
@@ -40,17 +44,19 @@ export const SlideWithHook = ({ children, handleClick, index }: SlideProps) => {
   );
 };
 
-export const SliderWithHook = (
-  {
-    children,
-    nextFunction,
-    previousFunction,
-    currentIndex,
-    transition,
-    handleTransition,
-    ...sliderOptions
-  }: SliderProps 
-) => {
+export const SliderWithHook = ({
+
+  children,
+  nextFunction,
+  previousFunction,
+  handleClick,
+  handleTransition,
+  currentIndex,
+  transition,
+  ...sliderOptions
+}: SliderProps) => {
+
+  
   const { itemNumber, totalNumber, loop } = sliderOptions;
 
   return (
@@ -72,7 +78,7 @@ export const SliderWithHook = (
             }}
             onTransitionEnd={() => handleTransition()}
           >
-            {children}
+            <SliderContext.Provider value={{ handleClick }}>{children}</SliderContext.Provider>
           </div>
         </div>
       </div>

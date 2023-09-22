@@ -2,15 +2,13 @@
 
 import { createContext, useContext } from "react";
 
-interface contextTypeTest {
-  handleClick: (item: number) => void;
+interface sliderContextType {
+  handleClick: (index: number) => void;
 }
 
-// export const SliderContext = createContext((_item: SetStateAction<number>) => {});
-// export const SliderContext = createContext<contextTypeTest>({ handleClick: () => {} });
-export const SliderContext = createContext<contextTypeTest | undefined>(undefined);
+export const SliderContext = createContext<sliderContextType | undefined>(undefined);
 
-export const useContextTypeTest = () => {
+export const useSliderContext = () => {
   const sliderContext = useContext(SliderContext);
   if (sliderContext === undefined) {
     throw new Error("there was an error");

@@ -41,7 +41,7 @@ export const HeroWithHook = () => {
     <SliderWithHook {...useSliderObj} {...sliderOptions}>
       <>
         {useSliderObj.sliderExportData.map((item, index) => (
-          <SlideWithHook index={index} handleClick={useSliderObj.handleClick} item={item}>
+          <SlideWithHook index={index}>
             <>
               <p>index: {index}</p>
               <p>key: {item.key} </p>

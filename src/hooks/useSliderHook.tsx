@@ -69,6 +69,8 @@ const useSliderHook = (
     setCurrentIndex((currentIndex) => currentIndex - 1);
   };
 
+  useEffect(() => {}, []);
+
   const handleClick = (item: number) => {
     if (loop) {
       setTransition(true);
